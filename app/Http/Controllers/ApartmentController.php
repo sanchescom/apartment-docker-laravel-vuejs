@@ -33,7 +33,7 @@ class ApartmentController extends Controller
             throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR, 'Creating apartment error', $exception);
         }
 
-        return response()->json($apartment->getResponseData(), Response::HTTP_OK);
+        return response()->json($apartment->toArray(), Response::HTTP_OK);
     }
 
 
@@ -54,13 +54,13 @@ class ApartmentController extends Controller
             throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR, 'Updating apartment error', $exception);
         }
 
-        return response()->json($apartment->getResponseData(), Response::HTTP_OK);
+        return response()->json($apartment->toArray(), Response::HTTP_OK);
     }
 
 
     public function getApartment($id)
     {
-        return response()->json(Apartment::findOrFail($id)->getResponseData(), Response::HTTP_OK);
+        return response()->json(Apartment::findOrFail($id)->toArray(), Response::HTTP_OK);
     }
 
 

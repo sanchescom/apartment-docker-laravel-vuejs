@@ -10,7 +10,7 @@ class ApartmentsCollection extends Collection
     public function getResponseData() : array
     {
         return $this->map(function (Apartment $apartment) {
-           return $apartment->getResponseData();
+           return $apartment->toArray();
         })->all();
     }
 }

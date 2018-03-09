@@ -50,12 +50,6 @@ class Apartment extends Model
     }
 
 
-    public function getResponseData() : array
-    {
-        return $this->toArray();
-    }
-
-
     /**
      * Get apartment by token
      *
