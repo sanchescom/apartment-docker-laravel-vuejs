@@ -1,7 +1,12 @@
 FROM php:7.2-fpm
 
-RUN apt-get update && apt-get install -y libmcrypt-dev \
-    && docker-php-ext-install \
+RUN apt-get update && apt-get install -y \
+    libmcrypt-dev \
+    curl
+RUN docker-php-ext-install \
     zip xml gd mcrypt pdo_mysql mbstring dom xmlwriter
+
+RUN cd /var/www && \
+    php artisan migrate
 
 WORKDIR /var/www
