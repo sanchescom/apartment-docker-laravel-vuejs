@@ -22,7 +22,7 @@ class CreateApartmentsTable extends Migration
             $table->string('city');
             $table->string('country');
             $table->string('email');
-            $table->string('token');
+            $table->string('token')->unique();
         });
     }
 
