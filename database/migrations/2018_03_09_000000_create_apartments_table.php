@@ -16,14 +16,23 @@ class CreateApartmentsTable extends Migration
         Schema::create('apartments', function (Blueprint $table) {
             $table->increments('id');
             $table->dateTime('created_at');
+            $table->dateTime('updated_at');
             $table->dateTime('move_in_date');
             $table->string('street');
             $table->string('post_code');
             $table->string('city');
             $table->string('country');
             $table->string('email');
-            $table->string('token')->unique();
+            $table->string('token', '40')->unique();
         });
+
+        DB::unprepared('
+            CREATE TRIGGER generate_token_for_apartment BEFORE INSERT ON apartments
+            FOR EACH ROW
+            BEGIN
+                SET NEW.token = SUBSTRING(MD5(RAND()) FROM 1 FOR 40);
+            END;
+        ');
     }
 
     /**
@@ -34,5 +43,7 @@ class CreateApartmentsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('apartments');
+
+        DB::unprepared('DROP TRIGGER `generate_token_for_apartment`');
     }
 }

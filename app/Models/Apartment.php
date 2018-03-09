@@ -34,7 +34,7 @@ class Apartment extends Model
         'email',
     ];
 
-    protected $guarded = [
+    protected $hidden = [
         'token',
     ];
 
@@ -70,7 +70,7 @@ class Apartment extends Model
     }
 
 
-    public static function createFromArray(array $array)
+    public static function createFromArray(array $array) : Apartment
     {
         $instance = self::create($array);
         $instance->token = str_random(40);

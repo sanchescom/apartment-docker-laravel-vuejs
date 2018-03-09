@@ -51,7 +51,7 @@ class ApartmentController extends Controller
         }
         catch (\Exception $exception)
         {
-            throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR, 'Creating apartment error', $exception);
+            throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR, 'Updating apartment error', $exception);
         }
 
         return response()->json($apartment->getResponseData(), Response::HTTP_OK);
