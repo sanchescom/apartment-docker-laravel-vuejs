@@ -68,11 +68,11 @@ class ApartmentController extends Controller
     {
         $this->validate($request, [
             'move_in_date' => 'required',
-            'street' => 'required|string',
-            'post_code' => 'required|string',
-            'city' => 'required|string',
-            'country' => 'required|string',
-            'email' => 'required|string|max:15|email',
+            'street'       => 'required|string',
+            'post_code'    => 'required|string',
+            'city'         => 'required|string',
+            'country'      => 'required|string',
+            'email'        => 'required|string|max:15|email',
         ]);
     }
 
