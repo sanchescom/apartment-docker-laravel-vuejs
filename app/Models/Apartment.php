@@ -62,13 +62,4 @@ class Apartment extends Model
     {
         return self::query()->where('token', $token)->firstOrFail();
     }
-
-
-    public static function createFromArray(array $array) : Apartment
-    {
-        $instance = self::create($array);
-        $instance->token = str_random(40);
-
-        return $instance;
-    }
 }

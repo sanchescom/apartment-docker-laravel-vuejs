@@ -26,7 +26,7 @@ class ApartmentController extends Controller
 
         try
         {
-            $apartment = Apartment::createFromArray($request->all());
+            $apartment = Apartment::create($request->all());
         }
         catch (\Exception $exception)
         {
