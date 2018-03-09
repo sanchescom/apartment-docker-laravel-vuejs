@@ -21,7 +21,7 @@ class CreateApartmentsTable extends Migration
             $table->string('post_code');
             $table->string('city');
             $table->string('country');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('token');
         });
     }
