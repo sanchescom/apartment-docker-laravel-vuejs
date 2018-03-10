@@ -89,7 +89,7 @@
 
         methods: {
             checkToken() {
-                return typeof this.token === 'undefined';
+                return typeof this.token === 'undefined' || !this.token;
             },
             getApartment()
             {

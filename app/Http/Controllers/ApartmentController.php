@@ -6,11 +6,15 @@ use App\Models\Apartment;
 use App\Repositories\ApartmentsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Mail\Message;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ApartmentController extends Controller
 {
+    const EMAIL_TEMPLATE = 'emails.welcome';
+
+
     public function getAllApartments()
     {
         return response()->json(ApartmentsRepository::getAll()->getResponseData(), Response::HTTP_OK);
@@ -23,7 +27,11 @@ class ApartmentController extends Controller
 
         try
         {
-            $apartment = Apartment::create($request->all());
+            $apartment = Apartment::create($request->all())->refresh();
+
+            \Mail::send(self::EMAIL_TEMPLATE, $apartment->getDataForEmail(), function (Message $message) use ($apartment)  {
+                $message->to($apartment->email);
+            });
         }
         catch (\Exception $exception)
         {

@@ -62,4 +62,18 @@ class Apartment extends Model
     {
         return self::query()->where('token', $token)->firstOrFail();
     }
+
+
+    /**
+     * Date for sending emails
+     *
+     * @return array
+     */
+    public function getDataForEmail() : array
+    {
+        return [
+            'id'    => $this->id,
+            'token' => $this->token,
+        ];
+    }
 }
