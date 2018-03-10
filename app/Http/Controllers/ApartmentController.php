@@ -13,10 +13,7 @@ class ApartmentController extends Controller
 {
     public function getAllApartments()
     {
-        return response()->json([
-            'data' => ApartmentsRepository::getAll()->getResponseData(),
-        ],
-        Response::HTTP_OK);
+        return response()->json(ApartmentsRepository::getAll()->getResponseData(), Response::HTTP_OK);
     }
 
 

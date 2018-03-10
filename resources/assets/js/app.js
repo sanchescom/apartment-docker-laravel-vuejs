@@ -7,16 +7,50 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import VueAxios from 'vue-axios';
+import axios from 'axios';
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+import App from './App.vue';
+import CreateApartment from './components/CreateApartment.vue';
+import DisplayApartment from './components/DisplayApartment.vue';
+import EditApartment from './components/EditApartment.vue';
 
-const app = new Vue({
-    el: '#app'
+export const app_url = 'http://test-form.d/api/';
+
+const routes = [
+    {
+        path: '/',
+        redirect: '/apartments'
+    },
+    {
+        name: 'CreateApartment',
+        path: '/apartments/create',
+        component: CreateApartment
+    },
+    {
+        name: 'DisplayApartment',
+        path: '/apartments',
+        component: DisplayApartment
+    },
+    {
+        name: 'EditApartment',
+        path: '/apartments/edit/:id',
+        component: EditApartment
+    }
+];
+
+Vue.use(VueRouter);
+Vue.use(VueAxios, axios);
+
+const router = new VueRouter({
+    mode: 'history',
+    linkActiveClass: 'open active',
+    routes: routes
 });
+
+new Vue(Vue.util.extend({
+    router
+}, App)).$mount('#app');
