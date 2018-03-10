@@ -7,16 +7,19 @@
 
 require('./bootstrap');
 
-
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
+import BootstrapVue from 'bootstrap-vue';
 
 import App from './App.vue';
 import CreateApartment from './components/CreateApartment.vue';
 import DisplayApartment from './components/DisplayApartment.vue';
 import EditApartment from './components/EditApartment.vue';
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 export const app_url = 'http://test-form.d/api/';
 
@@ -44,6 +47,7 @@ const routes = [
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
+Vue.use(BootstrapVue);
 
 const router = new VueRouter({
     mode: 'history',

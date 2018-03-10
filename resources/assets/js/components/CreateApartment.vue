@@ -62,18 +62,20 @@
     import {app_url} from "../app";
 
     export default {
-        data(){
-            return{
-                item:{}
+        data() {
+            return {
+                item: {}
             }
         },
         methods: {
-            addApartment(){
+            addApartment() {
                 let endpoint = app_url + 'apartments';
-                this.axios.post(endpoint, this.item).then((response) => {
-                    this.$router.push({
-                        name: 'DisplayApartment'
-                    })
+
+                this.axios.post(endpoint, this.item)
+                    .then((response) => {
+                        this.$router.push({
+                            name: 'DisplayApartment'
+                        })
                 })
             }
         }

@@ -40,8 +40,8 @@
     import {app_url} from "../app";
 
     export default {
-        data(){
-            return{
+        data() {
+            return {
                 items: []
             }
         },
@@ -55,10 +55,11 @@
             fetchApartments()
             {
                 let endpoint = app_url + 'apartments';
-                this.axios.get(endpoint).then((response) => {
-                    console.log(response);
-                    this.items = response.data;
-                });
+
+                this.axios.get(endpoint)
+                    .then((response) => {
+                        this.items = response.data;
+                    });
             }
         }
     }

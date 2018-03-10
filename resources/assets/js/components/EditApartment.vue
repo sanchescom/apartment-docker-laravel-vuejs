@@ -1,9 +1,11 @@
 <template>
     <div>
+        <b-alert :show="checkToken()" variant="danger">Token is required for editing from!</b-alert>
+
         <h1>Update Apartment</h1>
         <div class="row">
             <div class="col-md-10"></div>
-            <div class="col-md-2"><router-link :to="{ name: 'DisplayApartment' }" class="btn btn-success">Return to Items</router-link></div>
+            <div class="col-md-2"><router-link :to="{ name: 'DisplayApartment' }" class="btn btn-success">Return to Apartments</router-link></div>
         </div>
 
         <form v-on:submit.prevent="updateApartment">
@@ -56,10 +58,16 @@
                 </div>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group" v-show="checkToken() === false">
                 <button class="btn btn-primary">Save Apartment</button>
             </div>
         </form>
+        <b-modal ref="tokenModalRef" hide-footer title="Access token failed">
+            <div class="d-block text-center">
+                <h3>Your access token is wrong. Please use token which was sent you by email.</h3>
+            </div>
+        </b-modal>
+
     </div>
 </template>
 
@@ -68,9 +76,10 @@
     import {app_url} from "../app";
 
     export default{
-        data(){
-            return{
-                item:{}
+        data() {
+            return {
+                item: {},
+                token: this.$route.query.token
             }
         },
 
@@ -79,19 +88,40 @@
         },
 
         methods: {
+            checkToken() {
+                return typeof this.token === 'undefined';
+            },
             getApartment()
             {
                 let endpoint = app_url + 'apartments/' + this.$route.params.id;
-                this.axios.get(endpoint).then((response) => {
-                    this.item = response.data;
-                });
+
+                this.axios.get(endpoint)
+                    .then((response) => {
+                        this.item = response.data;
+                    });
             },
             updateApartment()
             {
                 let endpoint = app_url + 'apartments/' + this.$route.params.id;
-                this.axios.post(endpoint, this.item).then((response) => {
-                    this.$router.push({name: 'DisplayApartment'});
-                });
+
+                if (!this.checkToken()) {
+                    endpoint += '?token=' + this.token;
+                }
+
+                this.axios.post(endpoint, this.item)
+                    .then(response => {
+                        this.$router.push({
+                            name: 'DisplayApartment'
+                        });
+                        console.log(response)
+                    })
+                    .catch(error => {
+                        if (error.response.status === 403)
+                        {
+                            this.$refs.tokenModalRef.show();
+                        }
+                        console.log(error.response)
+                    });
             }
         }
     }
