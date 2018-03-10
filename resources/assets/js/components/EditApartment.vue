@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Update Item</h1>
+        <h1>Update Apartment</h1>
         <div class="row">
             <div class="col-md-10"></div>
             <div class="col-md-2"><router-link :to="{ name: 'DisplayApartment' }" class="btn btn-success">Return to Items</router-link></div>
@@ -55,11 +55,17 @@
                     </div>
                 </div>
             </div>
+            <br />
+            <div class="form-group">
+                <button class="btn btn-primary">Save Apartment</button>
+            </div>
         </form>
     </div>
 </template>
 
 <script>
+
+    import {app_url} from "../app";
 
     export default{
         data(){
@@ -75,14 +81,14 @@
         methods: {
             getApartment()
             {
-                let endpoint = app_url + 'apartment/' + this.$route.params.id;
+                let endpoint = app_url + 'apartments/' + this.$route.params.id;
                 this.axios.get(endpoint).then((response) => {
                     this.item = response.data;
                 });
             },
             updateApartment()
             {
-                let endpoint = app_url + 'apartment/' + this.$route.params.id;
+                let endpoint = app_url + 'apartments/' + this.$route.params.id;
                 this.axios.post(endpoint, this.item).then((response) => {
                     this.$router.push({name: 'DisplayApartment'});
                 });
