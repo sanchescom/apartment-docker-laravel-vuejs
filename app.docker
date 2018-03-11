@@ -1,10 +1,12 @@
 FROM debian
 
+#base
 RUN apt-get update && apt-get install -y \
     nodejs \
     libmcrypt-dev \
     curl
 
+#php
 RUN apt-get update && apt-get install -y \
     php7.0 \
     php7.0-fpm \
@@ -16,11 +18,18 @@ RUN apt-get update && apt-get install -y \
     php7.0-dom \
     php7.0-xmlwriter
 
-RUN curl -L https://www.npmjs.com/install.sh | sh
+#npm
+RUN curl -L https://www.npmjs.com/install.sh --output /var/install.sh
+RUN sh /var/install.sh
 
-RUN cd /var/www && \
-    php artisan migrate
+#composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_CACHE_DIR /composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&\
+    php composer-setup.php --install-dir=/usr/bin --filename=composer
 
-RUN echo php -v
+RUN npm install
+RUN npm run dev
+RUN composer install
 
 WORKDIR /var/www
