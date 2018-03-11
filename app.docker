@@ -1,35 +1,14 @@
-FROM debian
+FROM php:7.1.12-fpm
 
-#base
-RUN apt-get update && apt-get install -y \
-    nodejs \
-    libmcrypt-dev \
-    curl
+RUN apt-get update && apt-get install -y libmcrypt-dev \
+    libmagickwand-dev --no-install-recommends curl nano \
+    && docker-php-ext-install \
+    zip xml gd \
+    mcrypt pdo_mysql
 
-#php
-RUN apt-get update && apt-get install -y \
-    php7.0 \
-    php7.0-fpm \
-    php7.0-mysql \
-    php7.0-mcrypt \
-    php7.0-gd \
-    php7.0-curl \
-    php7.0-mbstring \
-    php7.0-dom \
-    php7.0-xmlwriter
-
-#npm
-RUN curl -L https://www.npmjs.com/install.sh --output /var/install.sh
-RUN sh /var/install.sh
-
-#composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_CACHE_DIR /composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&\
     php composer-setup.php --install-dir=/usr/bin --filename=composer
-
-RUN npm install
-RUN npm run dev
-RUN composer install
 
 WORKDIR /var/www

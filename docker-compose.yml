@@ -12,6 +12,7 @@ services:
     links:
       - app
   app:
+    command: composer install
     build:
       context: ./
       dockerfile: app.docker

@@ -1,15 +1,11 @@
-# Laravel and Vue.js test from with Docker
-This repo contains a Laravel and Vue.js installation setup to use Docker to create a development environment. This repo can be used as a starting point for developing Laravel apps with Docker.
+# Laravel and Vue.js test from
 
-This setup contains;
-
- - PHP 7.2
+ - PHP 7.1
  - Nginx
  - MySQL
- - Node.js
+ - Vue.js
 
 ## Run
-Make sure your have composer and [Docker](https://docs.docker.com/) installed
 
 Clone the repo
 ```sh
@@ -23,15 +19,17 @@ Install dependencies
 ```sh
     composer install
 ```
-Build and run the Docker containers
+Install node js and npm
 ```sh
-    docker-compose up -d
+    install nodejs 
+    
+    ln -s /usr/bin/nodejs /usr/bin/node
+    curl -L https://www.npmjs.com/install.sh --output /var/install.sh
+    sh /var/install.sh 
 ```
-This builds the containers and runs them in the background, while this
+Run npm
 ```sh
-    docker-compose up
+    npm run dev
 ```
-
-To check you app http://test-form/
    
    
