@@ -1,12 +1,26 @@
-FROM php:7.2-fpm
+FROM debian
 
 RUN apt-get update && apt-get install -y \
+    nodejs \
     libmcrypt-dev \
     curl
-RUN docker-php-ext-install \
-    zip xml gd mcrypt pdo_mysql mbstring dom xmlwriter
+
+RUN apt-get update && apt-get install -y \
+    php7.0 \
+    php7.0-fpm \
+    php7.0-mysql \
+    php7.0-mcrypt \
+    php7.0-gd \
+    php7.0-curl \
+    php7.0-mbstring \
+    php7.0-dom \
+    php7.0-xmlwriter
+
+RUN curl -L https://www.npmjs.com/install.sh | sh
 
 RUN cd /var/www && \
     php artisan migrate
+
+RUN echo php -v
 
 WORKDIR /var/www
