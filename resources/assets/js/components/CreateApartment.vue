@@ -6,7 +6,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Move in date:</label>
-                        <input type="text" class="form-control col-md-6" required id="datepicker" v-model="item.move_in_date">
+                        <input type="text" class="form-control col-md-6" required v-mask="'9999-99-99 99:99:99'" v-model="item.move_in_date">
                     </div>
                 </div>
             </div>

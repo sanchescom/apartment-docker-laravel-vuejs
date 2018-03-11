@@ -23,6 +23,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 export const app_url = 'http://test-form.d/api/';
 
+const VueInputMask = require('vue-inputmask').default;
+
 const routes = [
     {
         path: '/',
@@ -48,6 +50,7 @@ const routes = [
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
+Vue.use(VueInputMask);
 
 const router = new VueRouter({
     mode: 'history',
