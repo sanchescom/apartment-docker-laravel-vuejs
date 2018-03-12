@@ -1,14 +1,5 @@
 FROM php:7.1.12-fpm
 
-RUN apt-get update && apt-get install -y libmcrypt-dev \
-    libmagickwand-dev --no-install-recommends curl nano \
-    && docker-php-ext-install \
-    zip xml gd \
-    mcrypt pdo_mysql
-
-ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV COMPOSER_CACHE_DIR /composer
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&\
-    php composer-setup.php --install-dir=/usr/bin --filename=composer
-
-WORKDIR /var/www
+RUN apt-get update \
+    && apt-get install -y libmcrypt-dev mysql-client libmagickwand-dev --no-install-recommends curl nano \
+    && docker-php-ext-install zip xml gd mcrypt mbstring pdo_mysql
