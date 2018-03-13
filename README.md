@@ -7,8 +7,12 @@
 ## Run
 Clone the repo
 ```sh
-    git clone https://github.com/sanchescom/test-form.git
-    cd test-form
+git clone https://github.com/sanchescom/test-form.git
+cd test-form
+```
+Add host in hosts file
+```sh
+echo "127.0.0.1 testform.d" >> /etc/hosts
 ```
 
 For testing email use [mailtrap.io](https://mailtrap.io)
@@ -23,6 +27,9 @@ Build and run the Docker containers
 ```sh
 docker-compose up -d && docker-compose up
 ```
+
+Visit your app at [http://testform.d:8091](http://testform.d:8091/)
+
 
 ### With web server 
 Configure web server before
