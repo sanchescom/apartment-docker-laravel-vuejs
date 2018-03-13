@@ -30,4 +30,6 @@ return [
 
     'compiled' => realpath(storage_path('framework/views')),
 
+    'url' => env('APP_URL') . ':' . env('APP_PORT' , '80'),
+
 ];

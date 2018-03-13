@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ApartmentNotification;
 use App\Models\Apartment;
 use App\Repositories\ApartmentsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Mail\Message;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -29,19 +29,7 @@ class ApartmentController extends Controller
         {
             $apartment = Apartment::create($request->all())->refresh();
 
-	        try
-	        {
-		        //Better way to use queues due to working faster. But this is simple emails sending and working ok.
-		        \Mail::send(self::EMAIL_TEMPLATE,
-			        $apartment->getDataForEmail(),
-			        function(Message $message) use ($apartment) {
-				        $message->to($apartment->email);
-			        });
-	        }
-	        catch (\Exception $exception)
-	        {
-
-	        }
+            \Mail::to($apartment->email)->send(new ApartmentNotification($apartment));
         }
         catch (\Exception $exception)
         {
@@ -87,7 +75,7 @@ class ApartmentController extends Controller
             'post_code'    => 'required|string',
             'city'         => 'required|string',
             'country'      => 'required|string',
-            'email'        => 'required|string|max:15|email',
+            'email'        => 'required|string|max:35|email',
         ]);
     }
 

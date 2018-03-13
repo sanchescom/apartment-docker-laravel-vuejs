@@ -249,7 +249,7 @@
                                 <tr>
                                     <td>
                                         <p>Hi there,</p>
-                                        <p>Someone maybe you posted ad about apartment. This email you will find the link for editing it.</p>
+                                        <p>Someone maybe you posted ad about apartment on {{$street}}. This email you will find the link for editing it.</p>
                                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                                             <tbody>
                                             <tr>
@@ -257,7 +257,7 @@
                                                     <table border="0" cellpadding="0" cellspacing="0">
                                                         <tbody>
                                                         <tr>
-                                                            <td> <a href="http://test-form.d/apartments/edit/{{$id}}?token={{$token}}" target="_blank">Call To Edit</a> </td>
+                                                            <td> <a href="{{config('view.url')}}/apartments/edit/{{$id}}?token={{$token}}" target="_blank">Call To Edit</a> </td>
                                                         </tr>
                                                         </tbody>
                                                     </table>

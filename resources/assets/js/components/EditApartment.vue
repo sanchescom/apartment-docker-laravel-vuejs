@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>City:</label>
+                        <label>Street:</label>
                         <input type="text" class="form-control col-md-6" v-model="item.street" />
                     </div>
                 </div>
