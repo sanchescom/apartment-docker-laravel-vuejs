@@ -1,17 +1,33 @@
-# Laravel and Vue.js test from
+# Dockerized Laravel and Vue.js test from
 
  - PHP 7.2
  - MySQL
  - Vue.js
 
 ## Run
-Configure web server before
-
 Clone the repo
 ```sh
     git clone https://github.com/sanchescom/test-form.git
     cd test-form
 ```
+
+For testing email use [mailtrap.io](https://mailtrap.io)
+```sh
+Login: testfrom773@gmail.com
+Password: 12345678__
+```
+### With a docker
+Install [Docker](https://docs.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
+
+Build and run the Docker containers
+```sh
+docker-compose up -d && docker-compose up
+```
+
+### With web server 
+Configure web server before
+
+
 Install PHP
  - PHP >= 7.1.3
  - OpenSSL PHP Extension
@@ -39,9 +55,4 @@ Run npm
     npm run dev
 ```
 
-For testing email use [mailtrap.io](https://mailtrap.io)
-```sh
-Login: testfrom773@gmail.com
-Password: 12345678__
-```
    
