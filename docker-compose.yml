@@ -44,7 +44,7 @@ services:
       - ./:/var/www
     expose:
       - "8091"
-    command: bash -c "chmod -R u+x . && npm install standard@10.0.3 -g cross-env@latest style-loader --save-dev && npm run development"
+    command: bash -c "npm install node-sass cross-env@latest && chmod -R u+x /var/www/node_modules && npm run development"
 
   # The Database
   database:

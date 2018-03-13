@@ -44,6 +44,6 @@ class CreateApartmentsTable extends Migration
     {
         Schema::dropIfExists('apartments');
 
-        DB::unprepared('DROP TRIGGER `generate_token_for_apartment`');
+        DB::unprepared('DROP TRIGGER IF EXISTS `generate_token_for_apartment`');
     }
 }

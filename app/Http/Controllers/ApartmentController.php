@@ -29,10 +29,19 @@ class ApartmentController extends Controller
         {
             $apartment = Apartment::create($request->all())->refresh();
 
-            //Better way to use queues due to working faster. But this is simple emails sending and working ok.
-            \Mail::send(self::EMAIL_TEMPLATE, $apartment->getDataForEmail(), function (Message $message) use ($apartment)  {
-                $message->to($apartment->email);
-            });
+	        try
+	        {
+		        //Better way to use queues due to working faster. But this is simple emails sending and working ok.
+		        \Mail::send(self::EMAIL_TEMPLATE,
+			        $apartment->getDataForEmail(),
+			        function(Message $message) use ($apartment) {
+				        $message->to($apartment->email);
+			        });
+	        }
+	        catch (\Exception $exception)
+	        {
+
+	        }
         }
         catch (\Exception $exception)
         {
