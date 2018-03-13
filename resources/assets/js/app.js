@@ -21,7 +21,7 @@ import EditApartment from './components/EditApartment.vue';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-export const app_url = 'http://test-form.d/api/';
+export const app_url = 'http://testform.d:8091/api/';
 
 const VueInputMask = require('vue-inputmask').default;
 

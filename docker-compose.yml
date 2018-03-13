@@ -3,7 +3,6 @@ services:
 
   # The Application
   app:
-    command: composer install
     build:
       context: ./
       dockerfile: app.docker
@@ -27,6 +26,25 @@ services:
       - app
     ports:
       - 8091:80
+
+  composer:
+    restart: 'no'
+    image: composer
+    command: install
+    volumes_from:
+      - app
+    working_dir: /var/www
+
+  node:
+    image: "node:8"
+    working_dir: /var/www
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/var/www
+    expose:
+      - "8091"
+    command: bash -c "chmod -R u+x . && npm install standard@10.0.3 -g cross-env@latest style-loader --save-dev && npm run development"
 
   # The Database
   database:
